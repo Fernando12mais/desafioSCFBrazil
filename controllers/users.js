@@ -24,6 +24,11 @@ const createUser = (req, res) => {
   try {
     const { name, job } = req.body;
 
+    if (!name || !job)
+      return res
+        .status(400)
+        .send(`Parâmetros "name" e "job são obrigatórios."`);
+
     const highestId = data.at(-1).id;
     const newUser = {
       id: highestId + 1,
